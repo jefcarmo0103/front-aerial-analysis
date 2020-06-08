@@ -1,6 +1,6 @@
 <html ng-app="estoque">
     <head>
-        <title>Estoque</title>
+        <title>Aerial Analysis</title>
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;900&display=swap" rel="stylesheet">
         <link href="/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -9,26 +9,23 @@
     <body  ng-controller="produtoController as vm">
         <div class="principal-container">
             <div class="title">
-                <h3>Estoque</h3>
+                <h3>Aerial Analysis</h3>
             </div>
             <div class="principal-content">
                 <div class="first">
                     <div class="banner">
                         <div class="call">
                             <p>Consulte, altere e exclua</p>
-                            <p class="second-call">seus produtos</p>
+                            <p class="second-call">seus talhões</p>
                         </div>
 
                         <div class="add">
-                            <a id="btnAddProduct" ngclick="vm.initNewProduct()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Adicionar novo Produto </a>
+                            <a id="btnAddProduct" ngclick="vm.initNewProduct()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Adicionar novo Talhão </a>
                         </div>
                     </div>
                     <div class="head-table">
-                        <h3>Seus Produtos</h3>
+                        <h3>Seus Talhões</h3>
                     </div>
-
-                    
-
                     <div class="list-products">
                         <table>
                             <tbody>
@@ -108,7 +105,7 @@
                 </div>
                 
             </div>
-            <div id="dialog-form" title="Adicionar novo Produto">
+            <div id="dialog-form" title="Adicionar novo Talhão">
                 <p class="validateTips">All form fields are required.</p>
             
                 <form method="POST" id="formProduct">

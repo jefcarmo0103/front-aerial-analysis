@@ -39,12 +39,12 @@ app.use(session({ secret: config.secret, resave: false, saveUninitialized: true 
 
 // Aqui o mapemanto das rotas da aplicação. Todos esses mapeamentos fazem parte da aplicação
 // A cada require, o js é inicializado
-app.use('/estoque', require('./controllers/estoque.controller'));
+app.use('/home', require('./controllers/estoque.controller'));
 
 // configuração do redirecionamento inicial é isso que indica o que vai acontecer quando for feita a chamada do 
 // http://localhost:8092. Nesse caso, a aplicação será direcionada para 
 app.get('/', function (req, res) {
-    return res.redirect('/estoque');
+    return res.redirect('/home');
 });
 
 // Por fim, a inicialização dos dois servers. O primeiro do app e o segundo para a API
