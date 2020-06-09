@@ -1,13 +1,12 @@
 angular
-    .module('estoque', []);
+    .module('aerialAnalysis', []);
 
 angular
-    .module('estoque')
+    .module('aerialAnalysis')
     .controller('produtoController', Controller);
 
-function Controller($window, ProdutoService) {
+function Controller($window, ProdutoService, LoginService) {
     var vm = this;
-    vm.message = "teste";
     vm.products = [];
     vm.saveProduct = saveProduct;
     vm.deleteProduct = deleteProduct;
@@ -19,10 +18,17 @@ function Controller($window, ProdutoService) {
 
     vm.setProductEdit = setProductEdit;
 
+    vm.user = null;
+
     initProducts();
 
     function initProducts() {
         //get all products in the API
+        LoginService.GetById(sessionStorage.getItem("userid"))
+            .then((data) => {
+                vm.user = data;
+            })
+
         ProdutoService.GetAll().then(function (data) {
             vm.products = data;
             setTimeout(setColorInIndex, 500);

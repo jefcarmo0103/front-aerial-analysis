@@ -1,187 +1,50 @@
-<html ng-app="estoque">
-    <head>
-        <title>Aerial Analysis</title>
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;300;400;900&display=swap" rel="stylesheet">
-        <link href="/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link href="site.css" rel="stylesheet" />
-    </head>
-    <body  ng-controller="produtoController as vm">
-        <div class="principal-container">
-            <div class="title">
-                <h3>Aerial Analysis</h3>
-            </div>
-            <div class="principal-content">
-                <div class="first">
-                    <div class="banner">
-                        <div class="call">
-                            <p>Gerencie e organize</p>
-                            <p class="second-call">seus talhões</p>
-                        </div>
-
-                        <div class="add">
-                            <a id="btnAddProduct" ngclick="vm.initNewProduct()"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Adicionar novo Talhão </a>
-                        </div>
-                    </div>
-                    <div class="head-table">
-                        <h3>Seus Talhões</h3>
-                    </div>
-                    <div class="list-products">
-                        <table>
-                            <tbody>
-                                <tr onclick="javascript: controlSecond(this)" class="product-table" ng-repeat="product in vm.products" ng-click="vm.fillProduct(product)">
-                                    <td class="index negrito">#{{$index + 1}}</td>
-                                    <td class="product-detail negrito">{{product.codItem}}</td>
-                                    <td class="product-detail">{{product.tipoItem}}</td>
-                                    <td class="product-detail">{{product.dtEntrada}}</td>
-                                    <td class="product-detail">{{product.tamanhoItem}}</td>
-                                    <td class="product-price">$ {{product.precoSugeridoItem}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="second">
-                    <div class="header-detail">
-                        <div class="index-detail"></div>
-                        <div class="name-detail">
-                            <h4>{{vm.productSelected.codItem}}</h4>
-                            <h6>{{vm.productSelected.tipoItem}}</h6>
-                        </div>
-                    </div>
-                    <div class="body-detail">
-                        <div class="section-detail">
-                            <div><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Data de Entrada</div>
-                            <p class="negrito">{{vm.productSelected.dtEntrada}}</p>
-                        </div>
-                        <div class="section-detail">
-                            <div><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Marca</div>
-                            <p class="negrito">{{vm.productSelected.marcaItem}}</p>
-                        </div>
-
-                        <div class="section-detail">
-                            <div><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> Características</div>
-                            <p class="negrito">{{vm.productSelected.caracteristica}}</p>
-                        </div>
-
-                        <div class="lado-a-lado">
-                            <div class="section-detail espaco-lado-a-lado">
-                                <div><span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Tamanho</div>
-                                <p class="negrito">{{vm.productSelected.tamanhoItem}}</p>
-                            </div>
-                            <div class="section-detail">
-                                <div><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Cor</div>
-                                <p class="negrito">{{vm.productSelected.corItem}}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="lado-a-lado">
-                            <div class="section-detail espaco-lado-a-lado" >
-                                <div><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Etiqueta</div>
-                                <p class="negrito">$ {{vm.productSelected.valorEtiquetaCompraItem}}</p>
-                            </div>
-                            <div class="section-detail">
-                                <div><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Compra</div>
-                                <p class="negrito">$ {{vm.productSelected.valorPagoItem}}</p>
-                            </div>
-                        </div>
-                        <div class="lado-a-lado">
-                            <div class="section-detail margem">
-                                <div><span class="glyphicon glyphicon-gbp" aria-hidden="true"></span> Margem (100%)</div>
-                                <p class="negrito">$ {{vm.productSelected.valorPagoMargemItem}}</p>
-                            </div>
-                            <div class="section-detail">
-                                <div><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> Preço Sugerido</div>
-                                <p class="negrito">$ {{vm.productSelected.precoSugeridoItem}}</p>
-                            </div>
-                        </div>
-
-                        <div class="btn-group-vertical botoes" role="group" aria-label="...">
-                            <button type="button" class="btn btn-warning" id="btnEditar" ng-click="vm.setProductEdit(vm.productSelected)">Editar</button>
-                            <button type="button" class="btn btn-danger" ng-click="vm.deleteProduct()">Excluir</button>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-            </div>
-            <div id="dialog-form" title="Adicionar novo Talhão">
-                <p class="validateTips">All form fields are required.</p>
-            
-                <form method="POST" id="formProduct">
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Código do item: <input type="text" required class="form-control" placeholder="Código do Item" ng-model="vm.product.codItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Data de Entrada: <input type="text" required class="form-control" id="datepicker" placeholder="Data de Entrada" ng-model="vm.product.dtEntrada"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Categoria: <input type="text" required class="form-control" placeholder="Ex.: Vestido, Saia, Conjunto..."  ng-model="vm.product.tipoItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Marca: <input type="text" required class="form-control" placeholder="Marca"  ng-model="vm.product.marcaItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Características: <input type="text" required class="form-control" placeholder="Características"  ng-model="vm.product.caracteristica"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="lado-a-lado">
-                            <div class="form-group">
-                                <p>Tamanho: <input type="text" required class="form-control" placeholder="Tamanho" ng-model="vm.product.tamanhoItem"></p>
-                            </div>
-                            <div class="form-group">
-                                <p>Cor: <input type="text" required class="form-control" placeholder="Cor" ng-model="vm.product.corItem"></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Valor de etiqueta na compra: <input type="number" required class="form-control" placeholder="R$" ng-model="vm.product.valorEtiquetaCompraItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Valor pago na compra: <input type="number" required class="form-control" placeholder="R$" ng-model="vm.product.valorPagoItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Preço sugerido: <input type="number" required class="form-control" placeholder="R$" ng-model="vm.product.precoSugeridoItem"></p>
-                        </div>
-                    </div>
-                    
-                    <hr/>
-                    <button type="submit" class="btn btn-primary" ng-click="vm.saveProduct()">Salvar</button>
-                </form>
-            </div>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Aerial Analysis</title>
+	<link rel="stylesheet" type="text/css" href="login.css">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<img class="wave" src="wave.png">
+	<div class="container">
+		<div class="img">
+			<img src="bg.svg">
+		</div>
+		<div class="login-content" ng-app="aerialAnalysis" ng-controller="loginController as vm">
+			<form method="POST">
+				<img src="avatar.svg">
+				<h2 class="title">Bem-vindo</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Username</h5>
+           		   		<input type="text" class="input" ng-model="vm.user.username" required>
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+           		    	<input type="password" class="input" ng-model="vm.user.password" required>
+            	   </div>
+            	</div>
+				<button class="btn" ng-click="vm.loginUser()">Entrar</button>
+            </form>
         </div>
+    </div>
+	<script type="text/javascript" src="login.js" ></script>
+	<script src="jquery-2.1.4/jquery-2.1.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="angular/angular.min.js"></script>
 
-
-        <script src="jquery-2.1.4/jquery-2.1.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="angular/angular.min.js"></script>
-
-        <script src="produto.controller.js"></script>
-        <script src="produto.service.js"></script>
-
-        <script src="site.js"></script>
-    </body>
+	<script src="login.controller.js"></script>
+	<script src="login.service.js"></script>
+</body>
 </html>

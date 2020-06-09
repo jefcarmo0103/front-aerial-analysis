@@ -25,6 +25,7 @@ app.use(express.static( __dirname + '/content/'));
 app.use(express.static( __dirname + '/controllers/'));
 app.use(express.static( __dirname + '/services/'));
 app.use(express.static( __dirname + '/custom/'));
+app.use(express.static( __dirname + '/img/'));
 // Aqui existe uma configuração da camada visão criada pelo express.
 // Duas configurações estão sendo feitas
 // a engine de tratamento de visões usa arquivos .ejs

@@ -1,18 +1,22 @@
 (function () {
     angular
-        .module('estoque', ['ui.router'])
-        .config(config);
+        .module('aerialAnalysis', ['ui.router'])
+        .run(($rootScope, $location, AuthService) =>{
+            $rootScope.$on('$routeChangeStart', function (event, next, current) {
+                if (next.authorize) {
+                  if (!AuthService.getToken()) {
+                    /* Ugly way
+                    event.preventDefault();
+                    $location.path('/login');
+                    ========================== */
+          
+                    $rootScope.$evalAsync(function () {
+                      $location.path('/signin');
+                    })
+                  }
+                }
+              });
+        });
 
-    function config($stateProvider, $urlRouterProvider) {
-        // default route
-        $urlRouterProvider.otherwise("/");
-
-        $stateProvider
-            .state('estoque', {
-                url: '/estoque',
-                templateUrl: 'index.html',
-                controller: 'Produto.Controller',
-                controllerAs: 'vm'
-            });
-    }
+   
 })();

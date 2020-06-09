@@ -1,5 +1,5 @@
 angular
-    .module('estoque')
+    .module('aerialAnalysis')
     .factory('ProdutoService', Service);
 
 function Service($http, $q) {
