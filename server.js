@@ -15,6 +15,8 @@ var config = require('config.json');
 // faz a leitura da porta que será utilizada para o app
 var port = process.env.PORT || 8092;
 
+var path = require('path');
+
 // Inicialização do express do App. 
 // A primeira linha já trata a questão falada no dia 21/02, sobre diretórios com conteúdo estático.
 // Isso irá permitir que não façamos referência ao bootstrap e outras bibliotecas vindas da internet
