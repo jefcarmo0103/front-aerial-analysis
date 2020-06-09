@@ -17,6 +17,9 @@ function Controller($window, LoginService) {
                 sessionStorage.setItem("token", data.token);
 
                 $window.location.href = '/home';
+            })
+            .catch((data) => {
+                $window.alert(data);
             });
     }
 
