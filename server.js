@@ -44,7 +44,7 @@ app.use('/home', require('./controllers/estoque.controller'));
 // configuração do redirecionamento inicial é isso que indica o que vai acontecer quando for feita a chamada do 
 // http://localhost:8092. Nesse caso, a aplicação será direcionada para 
 app.get('/', function (req, res) {
-    return res.redirect('/home');
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Por fim, a inicialização dos dois servers. O primeiro do app e o segundo para a API
