@@ -6,17 +6,17 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link href="site.css" rel="stylesheet" />
     </head>
-    <body  ng-controller="produtoController as vm">
+    <body  ng-controller="homeController as vm">
         <div class="principal-container">
             <div class="title">
-                <h3>{{vm.firstname}}, Bem vindo ao Aerial Analysis</h3>
+                <h3>{{vm.user.lastname}}, {{vm.user.firstname}}. Bem vindo ao Aerial Analysis</h3>
             </div>
             <div class="principal-content">
                 <div class="first">
                     <div class="banner">
                         <div class="call">
                             <p>Gerencie e organize</p>
-                            <p class="second-call">seus talhões</p>
+                            <p class="second-call">os talhões da fazenda</p>
                         </div>
 
                         <div class="add">
@@ -29,13 +29,10 @@
                     <div class="list-products">
                         <table>
                             <tbody>
-                                <tr onclick="javascript: controlSecond(this)" class="product-table" ng-repeat="product in vm.products" ng-click="vm.fillProduct(product)">
+                                <tr onclick="javascript: controlSecond(this)" class="product-table" ng-repeat="product in vm.talhoes" ng-click="vm.fillProduct(product)">
                                     <td class="index negrito">#{{$index + 1}}</td>
-                                    <td class="product-detail negrito">{{product.codItem}}</td>
-                                    <td class="product-detail">{{product.tipoItem}}</td>
-                                    <td class="product-detail">{{product.dtEntrada}}</td>
-                                    <td class="product-detail">{{product.tamanhoItem}}</td>
-                                    <td class="product-price">$ {{product.precoSugeridoItem}}</td>
+                                    <td class="product-detail negrito">{{product.Caracteristica}}</td>
+                                    <td class="product-detail">{{product.tamanhoTalhao}}m²</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -45,63 +42,11 @@
                     <div class="header-detail">
                         <div class="index-detail"></div>
                         <div class="name-detail">
-                            <h4>{{vm.productSelected.codItem}}</h4>
-                            <h6>{{vm.productSelected.tipoItem}}</h6>
+                            <h4>{{vm.productSelected.Caracteristica}}</h4>
+                            <h6>{{vm.productSelected.tamanhoTalhao}}m²</h6>
                         </div>
                     </div>
-                    <div class="body-detail">
-                        <div class="section-detail">
-                            <div><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Data de Entrada</div>
-                            <p class="negrito">{{vm.productSelected.dtEntrada}}</p>
-                        </div>
-                        <div class="section-detail">
-                            <div><span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Marca</div>
-                            <p class="negrito">{{vm.productSelected.marcaItem}}</p>
-                        </div>
-
-                        <div class="section-detail">
-                            <div><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> Características</div>
-                            <p class="negrito">{{vm.productSelected.caracteristica}}</p>
-                        </div>
-
-                        <div class="lado-a-lado">
-                            <div class="section-detail espaco-lado-a-lado">
-                                <div><span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Tamanho</div>
-                                <p class="negrito">{{vm.productSelected.tamanhoItem}}</p>
-                            </div>
-                            <div class="section-detail">
-                                <div><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span> Cor</div>
-                                <p class="negrito">{{vm.productSelected.corItem}}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="lado-a-lado">
-                            <div class="section-detail espaco-lado-a-lado" >
-                                <div><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Etiqueta</div>
-                                <p class="negrito">$ {{vm.productSelected.valorEtiquetaCompraItem}}</p>
-                            </div>
-                            <div class="section-detail">
-                                <div><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Compra</div>
-                                <p class="negrito">$ {{vm.productSelected.valorPagoItem}}</p>
-                            </div>
-                        </div>
-                        <div class="lado-a-lado">
-                            <div class="section-detail margem">
-                                <div><span class="glyphicon glyphicon-gbp" aria-hidden="true"></span> Margem (100%)</div>
-                                <p class="negrito">$ {{vm.productSelected.valorPagoMargemItem}}</p>
-                            </div>
-                            <div class="section-detail">
-                                <div><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span> Preço Sugerido</div>
-                                <p class="negrito">$ {{vm.productSelected.precoSugeridoItem}}</p>
-                            </div>
-                        </div>
-
-                        <div class="btn-group-vertical botoes" role="group" aria-label="...">
-                            <button type="button" class="btn btn-warning" id="btnEditar" ng-click="vm.setProductEdit(vm.productSelected)">Editar</button>
-                            <button type="button" class="btn btn-danger" ng-click="vm.deleteProduct()">Excluir</button>
-                        </div>
-                        
-                    </div>
+                    
                 </div>
                 
             </div>
@@ -179,8 +124,10 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script src="angular/angular.min.js"></script>
 
-        <script src="produto.controller.js"></script>
-        <script src="produto.service.js"></script>
+        <script src="home.controller.js"></script>
+        <script src="home.service.js"></script>
+        <script src="fazenda.service.js"></script>
+        <script src="talhao.service.js"></script>
         <script src="login.service.js"></script>
 
         <script src="site.js"></script>

@@ -3,9 +3,9 @@ angular
 
 angular
     .module('aerialAnalysis')
-    .controller('produtoController', Controller);
+    .controller('homeController', Controller);
 
-function Controller($window, ProdutoService, LoginService) {
+function Controller($window, HomeService, LoginService, FazendaService, TalhaoService) {
     var vm = this;
     vm.products = [];
     vm.saveProduct = saveProduct;
@@ -19,20 +19,28 @@ function Controller($window, ProdutoService, LoginService) {
     vm.setProductEdit = setProductEdit;
 
     vm.user = null;
+    vm.fazenda = null;
 
-    initProducts();
+    init();
 
-    function initProducts() {
-        //get all products in the API
+    function init() {
         LoginService.GetById(sessionStorage.getItem("userid"))
             .then((data) => {
                 vm.user = data;
             })
 
-        ProdutoService.GetAll().then(function (data) {
-            vm.products = data;
-            setTimeout(setColorInIndex, 500);
-        });
+        FazendaService.GetByUser(sessionStorage.getItem("userid"))
+            .then((data) => {
+                vm.fazenda = data[0];
+
+                TalhaoService.GetByFarm(vm.fazenda._id).then(function (data) {
+                    console.log(data);
+                    vm.talhoes = data;
+                    setTimeout(setColorInIndex, 500);
+                });
+            });
+
+        
     }
 
     function initNewProduct(){
@@ -42,7 +50,7 @@ function Controller($window, ProdutoService, LoginService) {
     function saveProduct() {
         console.log(vm.product._id != null);
         if(vm.product._id != null){
-            ProdutoService.Update(vm.product)
+            HomeService.Update(vm.product)
                 .then(function () {
                     $window.alert("Produto Alterado");
                     vm.product = null;
@@ -52,7 +60,7 @@ function Controller($window, ProdutoService, LoginService) {
                 });
         }
         else{
-            ProdutoService.Create(vm.product)
+            HomeService.Create(vm.product)
                 .then(function () {
                     $window.alert("Produto Criado");
                     vm.product = null;
@@ -69,7 +77,7 @@ function Controller($window, ProdutoService, LoginService) {
 
     function deleteProduct() {
         if(confirm("Tem certeza que deseja excluir esse registro ?")){
-            ProdutoService.Delete(vm.productSelected._id)
+            HomeService.Delete(vm.productSelected._id)
             .then(function () {
                 $window.alert("Produto Excluido");
                 vm.product = null;

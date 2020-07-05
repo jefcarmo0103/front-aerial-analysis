@@ -3,7 +3,7 @@ angular
     .factory('LoginService', Service);
 
     function Service($http, $q) {
-    var apiURL = "https://back-aerial-analysis.herokuapp.com/api/login";
+    var apiURL = "http://localhost:9050/api/login";
     var service = {};
 
     service.Authenticate = Authenticate;
@@ -14,7 +14,8 @@ angular
 
     function Authenticate(user){
         return $http.post(apiURL + '/authenticate', user)
-                    .then(handleSuccess, handleSuccess);
+                    .then(handleSuccess)
+                    .catch(handleError);
     }
 
     function GetAll() {
@@ -22,6 +23,7 @@ angular
     }
 
     function GetById(_id){
+        $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.getItem("token");
         return $http.get(apiURL + '/' + _id).then(handleSuccess, handleError);
     }
 

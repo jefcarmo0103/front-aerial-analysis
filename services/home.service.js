@@ -1,6 +1,6 @@
 angular
     .module('aerialAnalysis')
-    .factory('ProdutoService', Service);
+    .factory('HomeService', Service);
 
 function Service($http, $q) {
     var apiURL = "http://localhost:9050/api/item";
@@ -14,19 +14,22 @@ function Service($http, $q) {
     return service;
 
     function GetAll() {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.getItem("token");
         return $http.get(apiURL + '/').then(handleSuccess, handleError);
     }
 
     function Create(product) {
-        product.valorPagoMargemItem = product.valorPagoItem * 2;
+        $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.getItem("token");
         return $http.post(apiURL + '/register', product).then(handleSuccess, handleError);
     }
 
     function Delete(_id) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.getItem("token");
         return $http.delete(apiURL + '/' + _id).then(handleSuccess, handleError);
     }
 
     function Update(product) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.getItem("token");
         return $http.put(apiURL + '/' + product._id, product).then(handleSuccess, handleError);
     }
 
