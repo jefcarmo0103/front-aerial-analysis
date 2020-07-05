@@ -3,7 +3,7 @@ angular
     .factory('FazendaService', Service);
 
 function Service($http, $q) {
-    var apiURL = "http://localhost:9050/api/fazenda";
+    var apiURL = "https://back-aerial-analysis.herokuapp.com/api/fazenda";
     var service = {};
 
     service.GetAll = GetAll;

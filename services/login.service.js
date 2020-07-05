@@ -3,7 +3,7 @@ angular
     .factory('LoginService', Service);
 
     function Service($http, $q) {
-    var apiURL = "http://localhost:9050/api/login";
+    var apiURL = "https://back-aerial-analysis.herokuapp.com/api/login";
     var service = {};
 
     service.Authenticate = Authenticate;

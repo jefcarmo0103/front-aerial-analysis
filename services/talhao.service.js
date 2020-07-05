@@ -3,7 +3,7 @@ angular
     .factory('TalhaoService', Service);
 
 function Service($http, $q) {
-    var apiURL = "http://localhost:9050/api/talhao";
+    var apiURL = "https://back-aerial-analysis.herokuapp.com/api/talhao";
     var service = {};
 
     service.GetAll = GetAll;
