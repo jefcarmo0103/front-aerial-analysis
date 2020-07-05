@@ -185,3 +185,22 @@ td {
 .linha{
     margin-bottom: 5px;
 }
+
+#aviso{
+    font-size: 12px;
+    text-align: center;
+}
+
+.moldura-map{
+    border: 1px solid black;
+    width: 260px;
+    height: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.moldura-map p {
+    margin-right: 5px;
+}

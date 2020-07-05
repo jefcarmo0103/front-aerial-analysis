@@ -31,8 +31,8 @@
                             <tbody>
                                 <tr onclick="javascript: controlSecond(this)" class="product-table" ng-repeat="product in vm.talhoes" ng-click="vm.fillProduct(product)">
                                     <td class="index negrito">#{{$index + 1}}</td>
-                                    <td class="product-detail negrito">{{product.Caracteristica}}</td>
-                                    <td class="product-detail">{{product.tamanhoTalhao}}m²</td>
+                                    <td class="product-detail negrito">{{product.descricao}}</td>
+                                    <td class="product-detail">{{product.tamanho}}m²</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -42,8 +42,33 @@
                     <div class="header-detail">
                         <div class="index-detail"></div>
                         <div class="name-detail">
-                            <h4>{{vm.productSelected.Caracteristica}}</h4>
-                            <h6>{{vm.productSelected.tamanhoTalhao}}m²</h6>
+                            <h4>{{vm.productSelected.descricao}}</h4>
+                            <h6>{{vm.productSelected.tamanho}}m²</h6>
+                        </div>
+                    </div>
+                    <div class="body-detail">
+                        <div class="section-detail">
+                            <div class="moldura-map">
+                                <p class="negrito">{{vm.productSelected.latitude}};</p>
+                                <p class="negrito">{{vm.productSelected.longitude}}</p>
+                            </div>
+                        </div>
+                        <div class="section-detail">
+                            <div><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> Temperatura</div>
+                            <p class="negrito">{{vm.productSelected.temperatura}}°C</p>
+                        </div>
+                        <div class="section-detail">
+                            <div><span class="glyphicon glyphicon-tint" aria-hidden="true"></span> Umidade</div>
+                            <p class="negrito">{{vm.productSelected.umidade}}%</p>
+                        </div>
+
+                        <div class="section-detail">
+                            <div><span class="glyphicon glyphicon-filter" aria-hidden="true"></span> PH</div>
+                            <p class="negrito">{{vm.productSelected.PH}}</p>
+                        </div>
+
+                        <div class="section-detail">
+                            <div id="aviso"><span>*</span> Caso os valores estejam vazios ou nulos, o dispositivo pode não estar enviando as informações</div>
                         </div>
                     </div>
                     
@@ -56,63 +81,24 @@
                 <form method="POST" id="formProduct">
                     <div class="linha">
                         <div class="form-group">
-                            <p>Código do item: <input type="text" required class="form-control" placeholder="Código do Item" ng-model="vm.product.codItem"></p>
+                            <p>Descrição: <input type="text" required class="form-control" placeholder="Descrição" ng-model="vm.product.descricao"></p>
                         </div>
                     </div>
 
                     <div class="linha">
                         <div class="form-group">
-                            <p>Data de Entrada: <input type="text" required class="form-control" id="datepicker" placeholder="Data de Entrada" ng-model="vm.product.dtEntrada"></p>
+                            <p>Tamanho: <input type="text" required class="form-control" id="datepicker" placeholder="Data de Entrada" ng-model="vm.product.dtEntrada"></p>
                         </div>
                     </div>
 
                     <div class="linha">
                         <div class="form-group">
-                            <p>Categoria: <input type="text" required class="form-control" placeholder="Ex.: Vestido, Saia, Conjunto..."  ng-model="vm.product.tipoItem"></p>
+                            <p>ID do Dispositivo: <input type="text" required class="form-control" placeholder="Ex.: Vestido, Saia, Conjunto..."  ng-model="vm.product.tipoItem"></p>
+                            <p>Este é o dispotivo instalado no talhão para que pegar os valores das métricas</p>
                         </div>
                     </div>
 
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Marca: <input type="text" required class="form-control" placeholder="Marca"  ng-model="vm.product.marcaItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Características: <input type="text" required class="form-control" placeholder="Características"  ng-model="vm.product.caracteristica"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="lado-a-lado">
-                            <div class="form-group">
-                                <p>Tamanho: <input type="text" required class="form-control" placeholder="Tamanho" ng-model="vm.product.tamanhoItem"></p>
-                            </div>
-                            <div class="form-group">
-                                <p>Cor: <input type="text" required class="form-control" placeholder="Cor" ng-model="vm.product.corItem"></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Valor de etiqueta na compra: <input type="number" required class="form-control" placeholder="R$" ng-model="vm.product.valorEtiquetaCompraItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Valor pago na compra: <input type="number" required class="form-control" placeholder="R$" ng-model="vm.product.valorPagoItem"></p>
-                        </div>
-                    </div>
-
-                    <div class="linha">
-                        <div class="form-group">
-                            <p>Preço sugerido: <input type="number" required class="form-control" placeholder="R$" ng-model="vm.product.precoSugeridoItem"></p>
-                        </div>
-                    </div>
-                    
+                     
                     <hr/>
                     <button type="submit" class="btn btn-primary" ng-click="vm.saveProduct()">Salvar</button>
                 </form>

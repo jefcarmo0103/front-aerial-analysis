@@ -48,7 +48,6 @@ function Controller($window, HomeService, LoginService, FazendaService, TalhaoSe
     }
 
     function saveProduct() {
-        console.log(vm.product._id != null);
         if(vm.product._id != null){
             HomeService.Update(vm.product)
                 .then(function () {
@@ -60,7 +59,7 @@ function Controller($window, HomeService, LoginService, FazendaService, TalhaoSe
                 });
         }
         else{
-            HomeService.Create(vm.product)
+            TalhaoService.Create(vm.product)
                 .then(function () {
                     $window.alert("Produto Criado");
                     vm.product = null;
